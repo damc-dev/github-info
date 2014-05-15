@@ -5,7 +5,6 @@ angular.module('githubInfoApp')
       $scope.username = 'damc-dev';
       $scope.req = {};
       $scope.lookupUser = function(form) {
-        console.log(form);
         $scope.submitted = true;
 
         if(form.$invalid){
@@ -15,7 +14,6 @@ angular.module('githubInfoApp')
 
         $http.get('https://api.github.com/users/' + $scope.req.username )
           .success(function(data, status, headers, config) {
-            console.log(data);
             $scope.user = data;
           })
           .error(function(data, status, headers, config) {
@@ -23,7 +21,6 @@ angular.module('githubInfoApp')
           });
         $http.get('https://api.github.com/users/' + $scope.req.username + '/starred?per_page=100' )
           .success(function(data, status, headers, config) {
-            console.log(data);
             $scope.stars = data;
             if(data.length == 100)
               $scope.stars.total = '100+';
@@ -36,7 +33,6 @@ angular.module('githubInfoApp')
           });
         $http.get('https://api.github.com/users/' + $scope.req.username + '/repos?per_page=100')
           .success(function(data, status, headers, config) {
-            console.log(data);
             $scope.repos = data;
           })
           .error(function(data, status, headers, config) {
