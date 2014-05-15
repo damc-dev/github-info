@@ -2,6 +2,11 @@
 
 angular
   .module('githubInfoApp', [
-    'ngResource',
-    'ui.bootstrap'
-  ]);
+    'ui.bootstrap',
+    'ngResource'
+  ])
+  .constant('VERSION', '1.0')
+  .run(['VERSION', '$rootScope', function (VERSION, $rootScope) {
+    $rootScope.version = VERSION;
+
+  }]);

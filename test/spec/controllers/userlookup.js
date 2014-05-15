@@ -1,23 +1,22 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: UserlookupCtrl', function () {
 
   // load the controller's module
   beforeEach(module('githubInfoApp'));
 
-  var MainCtrl,
+  var UserlookupCtrl,
     scope;
 
   // Initialize the controller and a mock scope
-  /*
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    UserlookupCtrl = $controller('UserlookupCtrl', {
       $scope: scope
     });
   }));
 
   it('should have damc-dev as the username', function () {
-    expect(scope.req.username).toEqual('damc-dev');
-  });*/
+    expect(scope.username).toEqual('damc-dev');
+  });
 });
