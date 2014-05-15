@@ -15,6 +15,10 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  // NPM tasks
+  grunt.loadNpmTasks('grunt-text-replace');
+
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -285,12 +289,21 @@ module.exports = function (grunt) {
           src: ['generated/*']
         }]
       },
-      fonts: {
-        expand: true,
-        dot: true,
-        cwd: '<%= yeoman.app %>/bower_components/font-awesome/fonts/',
-        src: ['*.*'],
-        dest: '<%= yeoman.dist %>/bower_components/font-awesome/fonts/'
+      assets: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>/bower_components/font-awesome/fonts/',
+          src: ['*.*'],
+          dest: '<%= yeoman.dist %>/bower_components/font-awesome/fonts/'
+        },
+        {
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>/bower_components/bootstrap/dist/fonts/',
+          src: ['*.*'],
+          dest: '<%= yeoman.dist %>/bower_components/bootstrap/dist/fonts/'
+        }]
       },
       styles: {
         expand: true,
@@ -298,6 +311,16 @@ module.exports = function (grunt) {
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
       }
+    },
+    replace: {
+      bowerSrcUrl: {
+        src: ['<%= yeoman.app %>/styles/*'],
+        dest: '<%= yeoman.app %>/styles/',
+        replacements: [{
+          from: 'url(/bower',
+          to: 'url(./bower'
+        }]
+     }
     },
 
     // Run some tasks in parallel to speed up the build process
@@ -387,14 +410,15 @@ module.exports = function (grunt) {
     'autoprefixer',
     'concat',
     'ngmin',
-    'copy:fonts',
+    'copy:assets',
     'copy:dist',
     'cdnify',
     'cssmin',
     'uglify',
     'rev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'replace:bowerSrcUrl'
   ]);
 
   grunt.registerTask('default', [
