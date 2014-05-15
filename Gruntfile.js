@@ -159,7 +159,8 @@ module.exports = function (grunt) {
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
             '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/styles/fonts/*'
+            '<%= yeoman.dist %>/styles/fonts/*',
+            '<%= yeoman.dist %>/fonts/*'
           ]
         }
       }
@@ -189,7 +190,7 @@ module.exports = function (grunt) {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>']
+        assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/fonts/*']
       }
     },
 
@@ -282,14 +283,14 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
-        },
-        {
-          expand: true,
-          dot: true,
-          cwd: '<%= yeoman.app %>/bower_components/font-awesome/fonts/',
-          src: ['*.*'],
-          dest: '<%= yeoman.dist %>/fonts/'
         }]
+      },
+      fonts: {
+        expand: true,
+        dot: true,
+        cwd: '<%= yeoman.app %>/bower_components/font-awesome/fonts/',
+        src: ['*.*'],
+        dest: '<%= yeoman.dist %>/bower_components/font-awesome/fonts/'
       },
       styles: {
         expand: true,
@@ -386,6 +387,7 @@ module.exports = function (grunt) {
     'autoprefixer',
     'concat',
     'ngmin',
+    'copy:fonts',
     'copy:dist',
     'cdnify',
     'cssmin',
